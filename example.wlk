@@ -2,14 +2,24 @@ class Nave {
   var combustible = 0
   var velocidad = 0
   var direccionRespectoAlSol = 0
+  method velocidad() {
+    return velocidad
+  }
+  method combustible(){
+    return combustible
+  }
+  method direccionRespectoAlSol(){
+    return direccionRespectoAlSol
+  }
   method acelerar(num) {
     velocidad = (velocidad + num).max(0).min(100000)
   }
   method superAcelerar(cuanto){ // extra
-  if(cuanto.between(0, 50000) ){self.acelerar(cuanto*2)}
-  else{
-    throw new Exception(message="El valor debe estar entre el 0 y el 50000")}
+  if(!cuanto.between(0, 50000) ){
+    self.error("El Valor debe estar entre 0 y 50000")}
+    self.acelerar(cuanto * 2)
   }
+
   method desacelerar(num){
     velocidad = (velocidad - num).max(0).min(100000)
   }
@@ -56,7 +66,7 @@ class NaveBaliza inherits Nave {
 }
 
 class NavePasajeros inherits Nave{
-const property pasajeros
+const property pasajeros = 0
 var racionesComida = 0
 var racionesBebida = 0
 
@@ -87,8 +97,8 @@ override method prepararViaje() {
 }
 
 class NaveCombate inherits Nave{
-var invisible
-var misiles
+var invisible = false
+var misiles = false
 const property mensajesEmitidos = []
 method ponerseVisible() {
   invisible = false
